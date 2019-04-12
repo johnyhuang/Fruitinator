@@ -36,15 +36,19 @@ Quick tour of Fruitinator!
 ### Features:
 
 #### Search fruit
+
 Fruitinator is able to take 7 trait catagories and find the fruit that matches and potentially matches the given traits from a wide range of other fruits.
+![search_fruit](https://github.com/johnyhuang/Fruitinator/blob/master/Demos/fruitinator_search.gif)
 
 #### Add trait
 
 Fruitinator is able to constantly expand its traits catalog by allowing Users to input traits that are not yet available into the system.
+![add_trait](https://github.com/johnyhuang/Fruitinator/blob/master/Demos/fruitinator_add_trait.gif)
 
 #### Add fruit
 
 Fruitinator is able to constantly expand its fruits database to be able to match more fruits by allowing Users to add even more fruits data to the system.
+![add_fruit](https://github.com/johnyhuang/Fruitinator/blob/master/Demos/fruitinator_add_fruit.gif)
 
 ## Explanations
 This section will explain the techniques used to make Fruitinator.
