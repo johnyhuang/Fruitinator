@@ -1,0 +1,25 @@
+Name:Outer Color:Inner Color:Size:Shape:Seeds:Exterior:Quirk
+Red Apple:Red:Yellow:Medium:Oblate-shaped:Several seeds:Soft exterior:None
+Green Apple:Green:Yellow:Medium:Oblate-shaped:Several seeds:Soft exterior:None
+Strawberry:Red:Red:Small:Conic-shaped:Many seeds:Soft exterior:None
+Watermelon:Green:Red:Large:Round-shaped:Many seeds:Hard exterior:None
+Banana:Yellow:Yellow:Medium:Crescent-shaped:Many seeds:Soft exterior:None
+Durian:Green:Yellow:Large:Egg-shaped:Several seeds:Thorny exterior:Pungent smell
+Pear:Green:White:Medium:Pear-shaped:Several seeds:Soft exterior:None
+Red Dragonfruit:Red:Red:Medium:Egg-shaped:Many seeds:Soft exterior:None
+White Dragonfruit:Red:White:Medium:Egg-shaped:Many seeds:Soft exterior:None
+Papaya:Green:Orange:Large:Pear-shaped:Many seeds:Soft exterior:None
+Cherry:Red:Red:Small:Oblate:Single seed:Soft exterior:None
+Starfruit:Yellow:Yellow:Medium:Star-shaped:Several seeds:Soft exterior:None
+Orange:Orange:Orange:Medium:Round-shaped:Several seeds:Soft exterior:Citrusy
+Avocado:Green:Green:Medium:Pear-shaped:Single seed:Soft exterior:None
+Blueberry:Blue:Blue:Small:Round-shaped:Several seeds:Soft exterior:None
+Lemon:Yellow:Yellow:Medium:Oval-shaped:Several seeds:Soft exterior:Citrusy
+Pumpkin:Orange:Orange:Large:Oblate-shaped:Many seeds:Hard exterior:None
+Kiwifruit:Brown:Green:Medium:Oval-shaped:Many seeds:Soft exterior:None
+Pineapple:Brown:Yellow:Large:Egg-shaped:Many seeds:Thorny exterior:None
+Mango:Yellow:Yellow:Medium:Egg-shaped:Single seed:Soft exterior:None
+Lychee:Red:White:Small:Round-shaped:Single seed:Scaly exterior:None
+Cantaloupe:Light green:Orange:Large:Round-shaped:Many seeds:Hard exterior:None
+Honeydew:Light green:Light green:Large:Round-shaped:Many seeds:Hard exterior:None
+Guava:Green:Red:Medium:Oval-shaped:Many seeds:Soft exterior:None

@@ -1,0 +1,33 @@
+Color:Red
+Color:Orange
+Color:Yellow
+Color:Green
+Color:Light green
+Color:Blue
+Color:Purple
+Color:Brown
+Color:Pink
+Color:Black
+Color:White
+Size:Small
+Size:Medium
+Size:Large
+Shape:Pear-shaped
+Shape:Crescent-shaped
+Shape:Oblate-shaped
+Shape:Round-shaped
+Shape:Egg-shaped
+Shape:Conic-shaped
+Shape:Star-shaped
+Shape:Oval-shaped
+Seeds:Single seed
+Seeds:Several seeds
+Seeds:Many seeds
+Exterior:Thorny exterior
+Exterior:Hard exterior
+Exterior:Soft exterior
+Exterior:Scaly exterior
+Exterior:Hairy exterior
+Quirk:Pungent smell
+Quirk:Citrusy
+Quirk:None
