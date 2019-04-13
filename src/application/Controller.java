@@ -46,7 +46,7 @@ public class Controller implements Initializable {
 			perfectMatchResult.clear();
 			potentialMatchResult.clear();
 			String[] traits = getFruitinatorChoiceBoxInput();
-			String[] searchResults = db.searchDatabaseCharacteristic(traits);
+			String[] searchResults = db.searchFruit(traits);
 			Boolean switchMatch = false;
 			if(searchResults == null) {
 				perfectMatchResult.appendText("No Matches");
@@ -151,7 +151,7 @@ public class Controller implements Initializable {
 		initializeTraitChoiceBox();
 	}
 	public void initializeOuterColorChoiceBox() {
-		String outerColors = ct.getCharacteristics("Color");
+		String outerColors = ct.getTraits("Color");
 		String[] outerColorsList = outerColors.split(":");
 		outerColorsChoices.removeAll(outerColorsChoices);
 		for(int i=0; i<outerColorsList.length; i++) {
@@ -160,7 +160,7 @@ public class Controller implements Initializable {
 		outerColorCB.getItems().setAll(outerColorsChoices);
 	}
 	public void initializeInnerColorChoiceBox() {
-		String innerColors = ct.getCharacteristics("Color");
+		String innerColors = ct.getTraits("Color");
 		String[] innerColorsList = innerColors.split(":");
 		innerColorsChoices.removeAll(innerColorsChoices);
 		for(int i=0; i<innerColorsList.length; i++) {
@@ -169,7 +169,7 @@ public class Controller implements Initializable {
 		innerColorCB.getItems().setAll(innerColorsChoices);
 	}
 	public void initializeSizeChoiceBox() {
-		String sizes = ct.getCharacteristics("Size");
+		String sizes = ct.getTraits("Size");
 		String[] sizeList = sizes.split(":");
 		sizeChoices.removeAll(sizeChoices);
 		for(int i=0; i<sizeList.length; i++) {
@@ -178,7 +178,7 @@ public class Controller implements Initializable {
 		sizeCB.getItems().setAll(sizeChoices);
 	}
 	public void initializeShapeChoiceBox() {
-		String shapes = ct.getCharacteristics("Shape");
+		String shapes = ct.getTraits("Shape");
 		String[] shapeList = shapes.split(":");
 		shapeChoices.removeAll(shapeChoices);
 		for(int i=0; i<shapeList.length; i++) {
@@ -187,7 +187,7 @@ public class Controller implements Initializable {
 		shapeCB.getItems().setAll(shapeChoices);
 	}
 	public void initializeSeedChoiceBox() {
-		String seeds= ct.getCharacteristics("Seeds");
+		String seeds= ct.getTraits("Seeds");
 		String[] seedList = seeds.split(":");
 		seedChoices.removeAll(seedChoices);
 		for(int i=0; i<seedList.length; i++) {
@@ -196,7 +196,7 @@ public class Controller implements Initializable {
 		seedCB.getItems().setAll(seedChoices);
 	}
 	public void initializeExteriorChoiceBox() {
-		String exteriors = ct.getCharacteristics("Exterior");
+		String exteriors = ct.getTraits("Exterior");
 		String[] exteriorList = exteriors.split(":");
 		exteriorChoices.removeAll(exteriorChoices);
 		for(int i=0; i<exteriorList.length; i++) {
@@ -205,7 +205,7 @@ public class Controller implements Initializable {
 		exteriorCB.getItems().setAll(exteriorChoices);
 	}
 	public void initializeQuirkChoiceBox() {
-		String quirks = ct.getCharacteristics("Quirk");
+		String quirks = ct.getTraits("Quirk");
 		String[] quirkList = quirks.split(":");
 		quirkChoices.removeAll(quirkChoices);
 		for(int i=0; i<quirkList.length; i++) {

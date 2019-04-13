@@ -15,7 +15,7 @@ public class Catalog {
 	public Catalog() {
 		catalog = new File("Catalog.txt");
 	}
-	public String getCharacteristics(String characteristics) {
+	public String getTraits(String catagory) {
 		StringBuilder characteristicsList = new StringBuilder();
 		String result = null;
 		try {
@@ -25,7 +25,7 @@ public class Catalog {
 			String reader;
 			while((reader=br.readLine())!=null) {
 				String[] segmentedReader = reader.split(":");
-				if(segmentedReader[0].equals(characteristics)) {
+				if(segmentedReader[0].equals(catagory)) {
 					characteristicsList.append(segmentedReader[1] + ":");
 				}
 			}

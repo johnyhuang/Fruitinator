@@ -38,7 +38,7 @@ public class Database {
 		return false;
 	}
 	
-	public String[] searchDatabaseCharacteristic(String[] characteristics) {
+	public String[] searchFruit(String[] traits) {
 		try {
 			fr = new FileReader(this.database);
 			BufferedReader br = new BufferedReader(fr);
@@ -47,17 +47,17 @@ public class Database {
 			Vector<String> potentialMatch = new Vector<String>();
 			Vector<String> allMatch = new Vector<String>();
 			while((reader=br.readLine())!=null) {
-				String[] resultCharacteristics = reader.split(":");
+				String[] segmentedReader = reader.split(":");
 				int matches = 0;
-				for(int i=1; i<resultCharacteristics.length; i++) {
-					if(resultCharacteristics[i].equals(characteristics[i-1])) {
+				for(int i=1; i<segmentedReader.length; i++) {
+					if(segmentedReader[i].equals(traits[i-1])) {
 						matches++;
 					}				
 				}
-				if(matches==resultCharacteristics.length-1) {
-					allMatch.add(resultCharacteristics[0]);
-				} else if (matches>=resultCharacteristics.length/2 && matches<resultCharacteristics.length) {
-					potentialMatch.add(resultCharacteristics[0]);
+				if(matches==segmentedReader.length-1) {
+					allMatch.add(segmentedReader[0]);
+				} else if (matches>=segmentedReader.length/2 && matches<segmentedReader.length) {
+					potentialMatch.add(segmentedReader[0]);
 				}
 			}
 			allMatch.add(":");
