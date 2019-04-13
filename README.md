@@ -48,12 +48,10 @@ Fruitinator is able to constantly expand its fruits database to be able to match
 ## Explanations
 This section will explain only the important techniques used to make fruitinator.
 
-#### Catalog.java
+### Catalog.java
 Catalog.java is the class responsible for operations related to the traits of fruits data.
 
-There are 3 methods within Catalog.java:
-
-getTraits
+#### getTraits
 
 getTraits takes the parameter that is a String catagory which is used to get a list of traits that belong to that catagory from Catalog.txt and returns it.
 ```java
@@ -79,7 +77,7 @@ public String getTraits(String catagory) {
 		return result;
 	}
 ```
-checkTraitExists
+#### checkTraitExists
 
 checkTraitExists takes the parameter String search which is compared to the traits in Catalog.txt and returns a true value if a match is found.
  ```java
@@ -103,7 +101,7 @@ checkTraitExists takes the parameter String search which is compared to the trai
 		
 	}
  ```
- addCatalogEntry
+ #### addCatalogEntry
  
  addCatalogEntry takes the parameter String entry and appends it to Catalog.txt.
  ```java
@@ -119,10 +117,10 @@ checkTraitExists takes the parameter String search which is compared to the trai
 	}
  ```
 
-#### Database.java
+### Database.java
 Database.java is the class responsible for operations related to the fruits and its traits data.
 
-searchFruit
+#### searchFruit
 
 searchFruit takes the parameter String[] traits and compares it to the traits of each fruits from Fruits List.txt. If every trait matches then it is added to Vector<String> allMatch, and if more than half and less than all traits matches it is added to Vector<String> potentialMatch. The combination of both allMatch and potentialMatch is then returned by the method.
 ```java
@@ -162,8 +160,10 @@ public String[] searchFruit(String[] traits) {
 		return null;
 	}
 ```
+```
 
-checkFruitExists
+
+#### checkFruitExists
 
 checkFruitExists takes the parameter String search and compares it to the names of each fruit in Fruit List.txt and returns a true value if a match is found.
 ```java
@@ -187,7 +187,7 @@ public boolean checkFruitExists(String search) {
 	}
 ```
 
-addFruitEntry
+#### addFruitEntry
 
 addFruitEntry takes the parameter String entry and appends it to Fruit List.txt.
 ```java
@@ -205,10 +205,10 @@ public void addFruitEntry(String entry) {
 	}
 ```
 
-#### Controller.java
+### Controller.java
 Controller.java is responsible for the interaction between the user through the GUI and the system.
 
-searchAction
+#### searchAction
 
 searchAction serves as the action listener for the "Search fruit" button. When the button is clicked it will get the selected traits, find matching fruits and display it in the Match and Potential Match TextAreas.
 ```java
@@ -248,7 +248,7 @@ public void searchAction(ActionEvent event) {
 		}
 ```
 
-addFruitAction
+#### addFruitAction
 
 addFruitAction serves as the action listener for the "Add a fruit" button. When the button is clicked it will get the selected traits and fruit name, and add it to the system.
 ```java
@@ -273,7 +273,7 @@ public void addFruitAction(ActionEvent event) {
 	}
 ```
 
-addTraitAction
+#### addTraitAction
 
 addTraitAction serves as the action listener for the "Add trait" button. When the button is clicked it will get the selected category and trait name, and add it to the system.
 ```java
@@ -297,10 +297,10 @@ addTraitAction serves as the action listener for the "Add trait" button. When th
 	}
 ```
 
-#### View.fxml
+### View.fxml
 View.fxml is responsible for the UI that the user will interact with.
 
-View.fxml
+#### View.fxml
 ```fxml
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
@@ -423,10 +423,10 @@ View.fxml
    </children>
 </AnchorPane>
 ```
-#### Main.java
+### Main.java
 Main.java is responsible as the entry point of the program and initializes the components.
 
-Main.java
+#### Main.java
 ```java
 public class Main extends Application {
 	@Override
