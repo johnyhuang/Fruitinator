@@ -15,7 +15,13 @@ public class Catalog {
 	public Catalog() {
 		catalog = new File("Catalog.txt");
 	}
-	public String getCharacteristics(String characteristics) {
+	
+	/**
+	 * Method to get all the traits that belongs to the selected category from the system
+	 * @param category This is the category of traits to be searched
+	 * @return a string of all the traits that belongs to the category
+	 */
+	public String getTraits(String category) {
 		StringBuilder characteristicsList = new StringBuilder();
 		String result = null;
 		try {
@@ -25,7 +31,7 @@ public class Catalog {
 			String reader;
 			while((reader=br.readLine())!=null) {
 				String[] segmentedReader = reader.split(":");
-				if(segmentedReader[0].equals(characteristics)) {
+				if(segmentedReader[0].equals(category)) {
 					characteristicsList.append(segmentedReader[1] + ":");
 				}
 			}
@@ -36,7 +42,13 @@ public class Catalog {
 		
 		return result;
 	}
-	public boolean searchTraitExists(String search) {
+	
+	/**
+	 * Method to check if a trait exists already in the system
+	 * @param search This is the trait to be checked
+	 * @return true if trait already exists in the system, false if it doesn't exists in the sytem
+	 */
+	public boolean checkTraitExists(String search) {
 		try {
 			fr = new FileReader(catalog);
 			BufferedReader br = new BufferedReader(fr);
@@ -56,6 +68,10 @@ public class Catalog {
 		
 	}
 	
+	/**
+	 * Method to add a trait to the system
+	 * @param entry This is the trait to be added along with its category already in the correct format
+	 */
 	public void addCatalogEntry(String entry) {
 		try {
 			fw = new FileWriter(catalog, true);

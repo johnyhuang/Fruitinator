@@ -19,6 +19,11 @@ public class Database {
 		database = new File("Fruits List.txt");
 	}
 	
+	/**
+	 * Method to check if fruit exists already in the system
+	 * @param search This is the name of the fruit to be checked
+	 * @return true if fruit already exists in the system, false if it doesn't exists in the system
+	 */
 	public boolean checkFruitExists(String search) {
 		try {
 			fr = new FileReader(this.database);
@@ -38,7 +43,12 @@ public class Database {
 		return false;
 	}
 	
-	public String[] searchDatabaseCharacteristic(String[] characteristics) {
+	/**
+	 * Method to find fruits that matches the selected traits
+	 * @param traits This is an array that contains all the traits inputed by the user
+	 * @return a string containing name of fruits that matches all the selected traits and matches more than half of the selected traits. 
+	 */
+	public String[] searchFruit(String[] traits) {
 		try {
 			fr = new FileReader(this.database);
 			BufferedReader br = new BufferedReader(fr);
@@ -47,17 +57,17 @@ public class Database {
 			Vector<String> potentialMatch = new Vector<String>();
 			Vector<String> allMatch = new Vector<String>();
 			while((reader=br.readLine())!=null) {
-				String[] resultCharacteristics = reader.split(":");
+				String[] segmentedReader = reader.split(":");
 				int matches = 0;
-				for(int i=1; i<resultCharacteristics.length; i++) {
-					if(resultCharacteristics[i].equals(characteristics[i-1])) {
+				for(int i=1; i<segmentedReader.length; i++) {
+					if(segmentedReader[i].equals(traits[i-1])) {
 						matches++;
 					}				
 				}
-				if(matches==resultCharacteristics.length-1) {
-					allMatch.add(resultCharacteristics[0]);
-				} else if (matches>=resultCharacteristics.length/2 && matches<resultCharacteristics.length) {
-					potentialMatch.add(resultCharacteristics[0]);
+				if(matches==segmentedReader.length-1) {
+					allMatch.add(segmentedReader[0]);
+				} else if (matches>=segmentedReader.length/2 && matches<segmentedReader.length) {
+					potentialMatch.add(segmentedReader[0]);
 				}
 			}
 			allMatch.add(":");
@@ -74,6 +84,10 @@ public class Database {
 		return null;
 	}
 	
+	/**
+	 * Method to add a fruit with its traits to the system
+	 * @param entry This contains the fruit name and traits already in the correct format
+	 */
 	public void addFruitEntry(String entry) {
 		try {
 			fw = new FileWriter(this.database, true);
