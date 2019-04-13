@@ -99,7 +99,7 @@ public class Controller implements Initializable {
 			outputLog.appendText("Please input trait name \n");
 		else if (checkTraitChoiceBoxFilled() == false) 
 			outputLog.appendText("Please input trait catagory \n");
-		else if (ct.searchTraitExists(traitInput.getText()))
+		else if (ct.checkTraitExists(traitInput.getText()))
 			outputLog.appendText("Trait already exists");
 		else {
 			ct.addCatalogEntry(traitCB.getValue() + ":" + traitInput.getText());

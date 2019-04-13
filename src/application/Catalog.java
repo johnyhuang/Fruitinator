@@ -36,7 +36,7 @@ public class Catalog {
 		
 		return result;
 	}
-	public boolean searchTraitExists(String search) {
+	public boolean checkTraitExists(String search) {
 		try {
 			fr = new FileReader(catalog);
 			BufferedReader br = new BufferedReader(fr);
