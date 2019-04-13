@@ -276,7 +276,7 @@ public void addFruitAction(ActionEvent event) {
 addTraitAction serves as the action listener for the "Add trait" button. When the button is clicked it will get the selected category and trait name, and add it to the system.
 ```java
 @FXML
-	public void addTraitAction(ActionEvent event) {
+public void addTraitAction(ActionEvent event) {
 		if(checkTraitChoiceBoxFilled() == false && checkTraitNameFilled() == false) 
 			outputLog.appendText("Please input trait category and name \n");
 		else if (checkTraitNameFilled() == false) 
@@ -293,6 +293,7 @@ addTraitAction serves as the action listener for the "Add trait" button. When th
 		}
 		
 	}
+	
 ```
 
 ### View.fxml
