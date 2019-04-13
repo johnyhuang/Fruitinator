@@ -160,8 +160,6 @@ public String[] searchFruit(String[] traits) {
 		return null;
 	}
 ```
-```
-
 
 #### checkFruitExists
 
