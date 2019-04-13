@@ -8,10 +8,7 @@ Fruitinator is a project developed for UPH's Operation Systems 2018/2019 class. 
 
 What things you need to install the software and how to install them
 
-+ Java 9
-```
-Give examples
-```
++ Java 8/9/10 JDK
 
 ### Installing
 
@@ -19,17 +16,7 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Download the file from the github repository
 
-```
-Give the example
-```
-
 2. Compile and run main.java on your Java IDE
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Fruitinator Tour
 Quick tour of Fruitinator!
@@ -52,15 +39,36 @@ Fruitinator is able to constantly expand its fruits database to be able to match
 
 ## Explanations
 This section will explain the techniques used to make Fruitinator.
+
 #### Catalog.java
+Catalog.java is the class responsible for operations related to the traits of fruits data.
+
+There are 3 methods within Catalog.java:
+
+getCharacteristics
+
+This method takes the parameter that is a String containing which c
+```java
+
+```
+searchTraitExists
+ ```java
+ ```
+ addCatalogEntry
+ ```java
+ ```
 
 #### Database.java
+Database.java is the class responsible for operations related to the fruits and its traits data.
 
 #### Controller.java
+Controller.java is responsible for the interaction between the user through the GUI and the system.
 
 #### View.fxml
+View.fxml is responsible for the UI that the user will interact with.
 
 #### Main.java
+Main.java is responsible as the entry point of the program and initializes the components.
 
 ## Built With
 
@@ -68,22 +76,14 @@ This section will explain the techniques used to make Fruitinator.
 * [Java 9](https://www.java.com/en/) - Language used
 * [JavaFX Scene Builder 2.0](https://gluonhq.com/products/scene-builder/) - Used for making GUI
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
-* **Johny Huang** - TIF UPH 2017 - Leader
-* **Nicholas** - TIF UPH 2017- Member
-* **Nicholas Chen** - TIF UPH 2017- Member
-* **Dave Joshua** - TIF UPH 2017- Member
-* **Leon Chrisdion** - TIF UPH 2017- Member
-* **Sutedja The Ho Ping** - TIF UPH 2017- Member
+* **Johny Huang** - TIF UPH 2017 
+* **Nicholas** - TIF UPH 2017
+* **Nicholas Chen** - TIF UPH 2017
+* **Dave Joshua** - TIF UPH 2017
+* **Leon Chrisdion** - TIF UPH 2017
+* **Sutedja The Ho Ping** - TIF UPH 2017
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -93,7 +93,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Icon made by Freepik from www.flaticon.com
 
