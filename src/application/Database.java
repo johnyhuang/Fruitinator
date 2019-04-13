@@ -19,6 +19,11 @@ public class Database {
 		database = new File("Fruits List.txt");
 	}
 	
+	/**
+	 * Method to check if fruit exists already in the system
+	 * @param search This is the name of the fruit to be checked
+	 * @return true if fruit already exists in the system, false if it doesn't exists in the system
+	 */
 	public boolean checkFruitExists(String search) {
 		try {
 			fr = new FileReader(this.database);
@@ -38,6 +43,11 @@ public class Database {
 		return false;
 	}
 	
+	/**
+	 * Method to find fruits that matches the selected traits
+	 * @param traits This is an array that contains all the traits inputed by the user
+	 * @return a string containing name of fruits that matches all the selected traits and matches more than half of the selected traits. 
+	 */
 	public String[] searchFruit(String[] traits) {
 		try {
 			fr = new FileReader(this.database);
@@ -74,6 +84,10 @@ public class Database {
 		return null;
 	}
 	
+	/**
+	 * Method to add a fruit with its traits to the system
+	 * @param entry This contains the fruit name and traits already in the correct format
+	 */
 	public void addFruitEntry(String entry) {
 		try {
 			fw = new FileWriter(this.database, true);
