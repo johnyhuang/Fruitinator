@@ -203,6 +203,84 @@ public void addFruitEntry(String entry) {
 	}
 ```
 
+### Model.java
+Model.java is responsible for the logic behind the program
+
+#### findFruitMatches
+
+findFruitMatches takes the parameter an array of String traits used to find matching fruits and updates it in the model.
+
+```java
+public void findFruitMatches(String[] traits) {
+		String[] searchResults = db.searchFruit(traits);
+		perfectMatch = new ArrayList<String>();
+		potentialMatch = new ArrayList<String>();
+		if(searchResults == null) {
+			perfectMatch.add("No Matches");
+			potentialMatch.add("No Matches");
+		} else {
+			boolean switchMatch = false;
+			for(int i=0; i<searchResults.length; i++) {
+				if(searchResults[i].equals(":")) {
+					switchMatch = true;
+					continue;
+				}
+				if(switchMatch == false) {
+					perfectMatch.add(searchResults[i]);
+				}else{
+					potentialMatch.add(searchResults[i]);
+				}
+			}
+			if(perfectMatch.isEmpty()) {
+				perfectMatch.add("No Matches");
+			}else if(potentialMatch.isEmpty()) {
+				potentialMatch.add("No Matches");
+			}
+		}
+	}
+```
+
+#### getPerfectMatch
+
+getPerfectMatch returns an array of String containing perfect matches to the specified traits stored in the model.
+
+```java
+public String[] getPerfectMatch() {
+		return perfectMatch.toArray(new String[perfectMatch.size()]);
+	}
+```
+
+#### getPotentialMatch
+
+getPotentialMatch returns an array of String containing potential matches to the specified traits stored in the model.
+
+```java
+public String[] getPotentialMatch() {
+		return potentialMatch.toArray(new String[potentialMatch.size()]);
+	}
+```
+
+#### addTrait
+
+addTrait takes the parameter String category and String name used to build the trait entry to be added in the catalog.
+
+```java
+public void addTrait(String category, String name) {
+		ct.addCatalogEntry(category + ":" + name);
+	}
+```
+
+#### addFruit
+
+addFruit takes the parameter String name and array of String traits used to build the fruit entry to be added in the database.
+
+```java
+public void addFruit(String name, String[] traits) {
+		db.addFruitEntry(name + ":" + traits[0] + ":" + traits[1] + ":" + traits[2] + ":" + traits[3] + ":"
+							+ traits[4] + ":" + traits[5] + ":" + traits[6]);
+	}
+```
+
 ### Controller.java
 Controller.java is responsible for the interaction between the user through the GUI and the system.
 
@@ -219,30 +297,16 @@ public void searchAction(ActionEvent event) {
 			perfectMatchResult.clear();
 			potentialMatchResult.clear();
 			String[] traits = getFruitinatorChoiceBoxInput();
-			String[] searchResults = db.searchFruit(traits);
-			Boolean switchMatch = false;
-			if(searchResults == null) {
-				perfectMatchResult.appendText("No Matches");
-				potentialMatchResult.appendText("No Matches");
-			}else {
-				for(int i=0; i<searchResults.length; i++) {
-					if(searchResults[i].equals(":")) {
-						switchMatch = true;
-						continue;
-					}
-					if(switchMatch == false) {
-						perfectMatchResult.appendText(searchResults[i]+"\n");
-					}else{
-						potentialMatchResult.appendText(searchResults[i]+"\n");
-					}
-				}
-				if(perfectMatchResult.getText().equals("")) {
-					perfectMatchResult.appendText("No Matches");
-				}else if(potentialMatchResult.getText().equals("")) {
-					potentialMatchResult.appendText("No Matches");
-				}
+			md.findFruitMatches(traits);
+			String[] perfectMatches = md.getPerfectMatch();
+			String[] potentialMatches = md.getPotentialMatch();
+			for(int i=0; i<perfectMatches.length; i++) {
+				perfectMatchResult.appendText(perfectMatches[i] + "\n");
 			}
-			getChoiceBoxesOptions();
+			for(int i=0; i<potentialMatches.length; i++) {
+				potentialMatchResult.appendText(potentialMatches[i] + "\n");
+			
+			}
 		}
 ```
 
@@ -258,12 +322,11 @@ public void addFruitAction(ActionEvent event) {
 			outputLog.appendText("Please input traits \n");
 		else if (checkFruitNameFilled() == false)
 			outputLog.appendText("Please input fruit name \n");
-		else if (db.checkFruitExists(fruitInput.getText()))
+		else if (md.checkFruit(fruitInput.getText()))
 			outputLog.appendText("Fruit already exists");
 		else {
 			String[] traits = getFruitinatorChoiceBoxInput();
-			db.addFruitEntry(fruitInput.getText() + ":" + traits[0] + ":" + traits[1] + ":" + traits[2] + ":" + traits[3] + ":"
-							+ traits[4] + ":" + traits[5] + ":" + traits[6]);
+			md.addFruit(fruitInput.getText(), traits);
 			fruitInput.clear();
 			outputLog.appendText("Fruit successfully added \n");
 			getChoiceBoxesOptions();
@@ -283,10 +346,10 @@ public void addTraitAction(ActionEvent event) {
 			outputLog.appendText("Please input trait name \n");
 		else if (checkTraitChoiceBoxFilled() == false) 
 			outputLog.appendText("Please input trait category \n");
-		else if (ct.checkTraitExists(traitInput.getText()))
+		else if (md.checkTrait(traitInput.getText()))
 			outputLog.appendText("Trait already exists");
 		else {
-			ct.addCatalogEntry(traitCB.getValue() + ":" + traitInput.getText());
+			md.addTrait(traitCB.getValue(), traitInput.getText());
 			traitInput.clear();
 			getChoiceBoxesOptions();
 			outputLog.appendText("Trait successfully added \n");
