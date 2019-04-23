@@ -29,9 +29,7 @@ public class Controller implements Initializable {
 	private TextField traitInput, fruitInput;
 	@FXML
 	private TextArea perfectMatchResult, potentialMatchResult, outputLog;
-	Catalog ct = new Catalog();
-	Database db = new Database();
-	
+	Model md = new Model();
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		getChoiceBoxesOptions();
@@ -51,30 +49,17 @@ public class Controller implements Initializable {
 			perfectMatchResult.clear();
 			potentialMatchResult.clear();
 			String[] traits = getFruitinatorChoiceBoxInput();
-			String[] searchResults = db.searchFruit(traits);
-			Boolean switchMatch = false;
-			if(searchResults == null) {
-				perfectMatchResult.appendText("No Matches");
-				potentialMatchResult.appendText("No Matches");
-			}else {
-				for(int i=0; i<searchResults.length; i++) {
-					if(searchResults[i].equals(":")) {
-						switchMatch = true;
-						continue;
-					}
-					if(switchMatch == false) {
-						perfectMatchResult.appendText(searchResults[i]+"\n");
-					}else{
-						potentialMatchResult.appendText(searchResults[i]+"\n");
-					}
-				}
-				if(perfectMatchResult.getText().equals("")) {
-					perfectMatchResult.appendText("No Matches");
-				}else if(potentialMatchResult.getText().equals("")) {
-					potentialMatchResult.appendText("No Matches");
-				}
+			md.findFruitMatches(traits);
+			String[] perfectMatches = md.getPerfectMatch();
+			String[] potentialMatches = md.getPotentialMatch();
+			for(int i=0; i<perfectMatches.length; i++) {
+				perfectMatchResult.appendText(perfectMatches[i] + "\n");
 			}
-			getChoiceBoxesOptions();
+			for(int i=0; i<potentialMatches.length; i++) {
+				potentialMatchResult.appendText(potentialMatches[i] + "\n");
+			
+			}
+			
 		}
 	}
 	
@@ -90,12 +75,11 @@ public class Controller implements Initializable {
 			outputLog.appendText("Please input traits \n");
 		else if (checkFruitNameFilled() == false)
 			outputLog.appendText("Please input fruit name \n");
-		else if (db.checkFruitExists(fruitInput.getText()))
+		else if (md.checkFruit(fruitInput.getText()))
 			outputLog.appendText("Fruit already exists");
 		else {
 			String[] traits = getFruitinatorChoiceBoxInput();
-			db.addFruitEntry(fruitInput.getText() + ":" + traits[0] + ":" + traits[1] + ":" + traits[2] + ":" + traits[3] + ":"
-							+ traits[4] + ":" + traits[5] + ":" + traits[6]);
+			md.addFruit(fruitInput.getText(), traits);
 			fruitInput.clear();
 			outputLog.appendText("Fruit successfully added \n");
 			getChoiceBoxesOptions();
@@ -114,10 +98,10 @@ public class Controller implements Initializable {
 			outputLog.appendText("Please input trait name \n");
 		else if (checkTraitChoiceBoxFilled() == false) 
 			outputLog.appendText("Please input trait category \n");
-		else if (ct.checkTraitExists(traitInput.getText()))
+		else if (md.checkTrait(traitInput.getText()))
 			outputLog.appendText("Trait already exists");
 		else {
-			ct.addCatalogEntry(traitCB.getValue() + ":" + traitInput.getText());
+			md.addTrait(traitCB.getValue(), traitInput.getText());
 			traitInput.clear();
 			getChoiceBoxesOptions();
 			outputLog.appendText("Trait successfully added \n");
@@ -196,11 +180,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the OuterColor ChoiceBox options from the catalog
+	 * Method to get the OuterColor ChoiceBox options from the Model
 	 */
 	public void initializeOuterColorChoiceBox() {
-		String outerColors = ct.getTraits("Color");
-		String[] outerColorsList = outerColors.split(":");
+		String[] outerColorsList = md.getTraitsArray("Color");
 		outerColorsChoices.removeAll(outerColorsChoices);
 		for(int i=0; i<outerColorsList.length; i++) {
 			outerColorsChoices.add(outerColorsList[i]);
@@ -209,11 +192,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the InnerColor ChoiceBox options from the catalog
+	 * Method to get the InnerColor ChoiceBox options from the Model
 	 */
 	public void initializeInnerColorChoiceBox() {
-		String innerColors = ct.getTraits("Color");
-		String[] innerColorsList = innerColors.split(":");
+		String[] innerColorsList = md.getTraitsArray("Color");
 		innerColorsChoices.removeAll(innerColorsChoices);
 		for(int i=0; i<innerColorsList.length; i++) {
 			innerColorsChoices.add(innerColorsList[i]);
@@ -222,11 +204,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the Size ChoiceBox options from the catalog
+	 * Method to get the Size ChoiceBox options from the Model
 	 */
 	public void initializeSizeChoiceBox() {
-		String sizes = ct.getTraits("Size");
-		String[] sizeList = sizes.split(":");
+		String[] sizeList = md.getTraitsArray("Size");
 		sizeChoices.removeAll(sizeChoices);
 		for(int i=0; i<sizeList.length; i++) {
 			sizeChoices.add(sizeList[i]);
@@ -235,11 +216,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the Shape ChoiceBox options from the catalog
+	 * Method to get the Shape ChoiceBox options from the Model
 	 */
 	public void initializeShapeChoiceBox() {
-		String shapes = ct.getTraits("Shape");
-		String[] shapeList = shapes.split(":");
+		String[] shapeList = md.getTraitsArray("Shape");
 		shapeChoices.removeAll(shapeChoices);
 		for(int i=0; i<shapeList.length; i++) {
 			shapeChoices.add(shapeList[i]);
@@ -248,11 +228,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the Seed ChoiceBox options from the catalog
+	 * Method to get the Seed ChoiceBox options from the Model
 	 */
 	public void initializeSeedChoiceBox() {
-		String seeds= ct.getTraits("Seeds");
-		String[] seedList = seeds.split(":");
+		String[] seedList = md.getTraitsArray("Seeds");
 		seedChoices.removeAll(seedChoices);
 		for(int i=0; i<seedList.length; i++) {
 			seedChoices.add(seedList[i]);
@@ -261,11 +240,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the Exterior ChoiceBox options from the catalog
+	 * Method to get the Exterior ChoiceBox options from the Model
 	 */
 	public void initializeExteriorChoiceBox() {
-		String exteriors = ct.getTraits("Exterior");
-		String[] exteriorList = exteriors.split(":");
+		String[] exteriorList = md.getTraitsArray("Exterior");
 		exteriorChoices.removeAll(exteriorChoices);
 		for(int i=0; i<exteriorList.length; i++) {
 			exteriorChoices.add(exteriorList[i]);
@@ -274,11 +252,10 @@ public class Controller implements Initializable {
 	}
 	
 	/**
-	 * Method to get the Quirk ChoiceBox options from the catalog
+	 * Method to get the Quirk ChoiceBox options from the Model
 	 */
 	public void initializeQuirkChoiceBox() {
-		String quirks = ct.getTraits("Quirk");
-		String[] quirkList = quirks.split(":");
+		String[] quirkList = md.getTraitsArray("Quirk");
 		quirkChoices.removeAll(quirkChoices);
 		for(int i=0; i<quirkList.length; i++) {
 			quirkChoices.add(quirkList[i]);
