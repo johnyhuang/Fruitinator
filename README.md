@@ -48,161 +48,6 @@ Fruitinator is able to constantly expand its fruits database to be able to match
 ## Explanations
 This section will explain only the important techniques used to make fruitinator.
 
-### Catalog.java
-Catalog.java is the class responsible for operations related to the traits of fruits data.
-
-#### getTraits
-
-getTraits takes the parameter that is a String catagory which is used to get a list of traits that belong to that catagory from Catalog.txt and returns it.
-```java
-public String getTraits(String catagory) {
-		StringBuilder characteristicsList = new StringBuilder();
-		String result = null;
-		try {
-			fr = new FileReader(catalog);
-			BufferedReader br = new BufferedReader(fr);
-			
-			String reader;
-			while((reader=br.readLine())!=null) {
-				String[] segmentedReader = reader.split(":");
-				if(segmentedReader[0].equals(catagory)) {
-					characteristicsList.append(segmentedReader[1] + ":");
-				}
-			}
-			result = characteristicsList.toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		
-		return result;
-	}
-```
-#### checkTraitExists
-
-checkTraitExists takes the parameter String search which is compared to the traits in Catalog.txt and returns a true value if a match is found.
- ```java
- public boolean checkTraitExists(String search) {
-		try {
-			fr = new FileReader(catalog);
-			BufferedReader br = new BufferedReader(fr);
-			
-			String reader;
-			while((reader=br.readLine())!=null) {
-				String[] segmentedResult = reader.split(":");
-				if(segmentedResult[1].equals(search)) {
-					return true;
-				}
-			}
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-		
-	}
- ```
- #### addCatalogEntry
- 
- addCatalogEntry takes the parameter String entry and appends it to Catalog.txt.
- ```java
- public void addCatalogEntry(String entry) {
-		try {
-			fw = new FileWriter(catalog, true);
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println(entry);
-			pw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
- ```
-
-### Database.java
-Database.java is the class responsible for operations related to the fruits and its traits data.
-
-#### searchFruit
-
-searchFruit takes the parameter String[] traits and compares it to the traits of each fruits from Fruits List.txt. If every trait matches then it is added to Vector<String> allMatch, and if more than half and less than all traits matches it is added to Vector<String> potentialMatch. The combination of both allMatch and potentialMatch is then returned by the method.
-```java
-public String[] searchFruit(String[] traits) {
-		try {
-			fr = new FileReader(this.database);
-			BufferedReader br = new BufferedReader(fr);
-			
-			String reader;
-			Vector<String> potentialMatch = new Vector<String>();
-			Vector<String> allMatch = new Vector<String>();
-			while((reader=br.readLine())!=null) {
-				String[] segmentedReader = reader.split(":");
-				int matches = 0;
-				for(int i=1; i<segmentedReader.length; i++) {
-					if(segmentedReader[i].equals(traits[i-1])) {
-						matches++;
-					}				
-				}
-				if(matches==segmentedReader.length-1) {
-					allMatch.add(segmentedReader[0]);
-				} else if (matches>=segmentedReader.length/2 && matches<segmentedReader.length) {
-					potentialMatch.add(segmentedReader[0]);
-				}
-			}
-			allMatch.add(":");
-			allMatch.addAll(potentialMatch);
-			String[] result = allMatch.toArray(new String[allMatch.size()]);
-			if(allMatch.size()>1) {
-				return result;
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-```
-
-#### checkFruitExists
-
-checkFruitExists takes the parameter String search and compares it to the names of each fruit in Fruit List.txt and returns a true value if a match is found.
-```java
-public boolean checkFruitExists(String search) {
-		try {
-			fr = new FileReader(this.database);
-			BufferedReader br = new BufferedReader(fr);
-			
-			String reader;
-			while((reader=br.readLine())!=null) {
-				String[] segmentedResult = reader.split(":");
-				if(segmentedResult[0].equals(search)) {
-					return true;
-				}
-			}
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-```
-
-#### addFruitEntry
-
-addFruitEntry takes the parameter String entry and appends it to Fruit List.txt.
-```java
-public void addFruitEntry(String entry) {
-		try {
-			fw = new FileWriter(this.database, true);
-			PrintWriter pw = new PrintWriter(fw);
-			
-			pw.println(entry);
-			pw.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-```
-
 ### Model.java
 Model.java is responsible for the logic behind the program
 
@@ -485,6 +330,162 @@ View.fxml is responsible for the UI that the user will interact with.
    </children>
 </AnchorPane>
 ```
+
+### Catalog.java
+Catalog.java is the class responsible for operations related to the traits of fruits data.
+
+#### getTraits
+
+getTraits takes the parameter that is a String catagory which is used to get a list of traits that belong to that catagory from Catalog.txt and returns it.
+```java
+public String getTraits(String catagory) {
+		StringBuilder characteristicsList = new StringBuilder();
+		String result = null;
+		try {
+			fr = new FileReader(catalog);
+			BufferedReader br = new BufferedReader(fr);
+			
+			String reader;
+			while((reader=br.readLine())!=null) {
+				String[] segmentedReader = reader.split(":");
+				if(segmentedReader[0].equals(catagory)) {
+					characteristicsList.append(segmentedReader[1] + ":");
+				}
+			}
+			result = characteristicsList.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		return result;
+	}
+```
+#### checkTraitExists
+
+checkTraitExists takes the parameter String search which is compared to the traits in Catalog.txt and returns a true value if a match is found.
+ ```java
+ public boolean checkTraitExists(String search) {
+		try {
+			fr = new FileReader(catalog);
+			BufferedReader br = new BufferedReader(fr);
+			
+			String reader;
+			while((reader=br.readLine())!=null) {
+				String[] segmentedResult = reader.split(":");
+				if(segmentedResult[1].equals(search)) {
+					return true;
+				}
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+ ```
+ #### addCatalogEntry
+ 
+ addCatalogEntry takes the parameter String entry and appends it to Catalog.txt.
+ ```java
+ public void addCatalogEntry(String entry) {
+		try {
+			fw = new FileWriter(catalog, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println(entry);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+ ```
+
+### Database.java
+Database.java is the class responsible for operations related to the fruits and its traits data.
+
+#### searchFruit
+
+searchFruit takes the parameter String[] traits and compares it to the traits of each fruits from Fruits List.txt. If every trait matches then it is added to Vector<String> allMatch, and if more than half and less than all traits matches it is added to Vector<String> potentialMatch. The combination of both allMatch and potentialMatch is then returned by the method.
+```java
+public String[] searchFruit(String[] traits) {
+		try {
+			fr = new FileReader(this.database);
+			BufferedReader br = new BufferedReader(fr);
+			
+			String reader;
+			Vector<String> potentialMatch = new Vector<String>();
+			Vector<String> allMatch = new Vector<String>();
+			while((reader=br.readLine())!=null) {
+				String[] segmentedReader = reader.split(":");
+				int matches = 0;
+				for(int i=1; i<segmentedReader.length; i++) {
+					if(segmentedReader[i].equals(traits[i-1])) {
+						matches++;
+					}				
+				}
+				if(matches==segmentedReader.length-1) {
+					allMatch.add(segmentedReader[0]);
+				} else if (matches>=segmentedReader.length/2 && matches<segmentedReader.length) {
+					potentialMatch.add(segmentedReader[0]);
+				}
+			}
+			allMatch.add(":");
+			allMatch.addAll(potentialMatch);
+			String[] result = allMatch.toArray(new String[allMatch.size()]);
+			if(allMatch.size()>1) {
+				return result;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+```
+
+#### checkFruitExists
+
+checkFruitExists takes the parameter String search and compares it to the names of each fruit in Fruit List.txt and returns a true value if a match is found.
+```java
+public boolean checkFruitExists(String search) {
+		try {
+			fr = new FileReader(this.database);
+			BufferedReader br = new BufferedReader(fr);
+			
+			String reader;
+			while((reader=br.readLine())!=null) {
+				String[] segmentedResult = reader.split(":");
+				if(segmentedResult[0].equals(search)) {
+					return true;
+				}
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+```
+
+#### addFruitEntry
+
+addFruitEntry takes the parameter String entry and appends it to Fruit List.txt.
+```java
+public void addFruitEntry(String entry) {
+		try {
+			fw = new FileWriter(this.database, true);
+			PrintWriter pw = new PrintWriter(fw);
+			
+			pw.println(entry);
+			pw.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+```
+
 ### Main.java
 Main.java is responsible as the entry point of the program and initializes the components.
 
