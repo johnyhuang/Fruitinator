@@ -24,7 +24,7 @@ Restrictions  and Scope of fruitinator
 
 + Fruitinator is designed to work with only fruits, it may not run correctly with items outside of fruits.
 
-+ Fruitinator is made using JavaFX 9, it is not compatible with Java 11 and above.
++ Fruitinator is made using JavaFX 9, JDK 8 or above is required.
 
 ## Fruitinator Tour
 Quick tour of Fruitinator!
