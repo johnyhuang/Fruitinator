@@ -8,7 +8,7 @@ Fruitinator is a project developed for UPH's Operation Systems 2018/2019 class. 
 
 What things you need to install the software and how to install them
 
-+ Java 8/9/10 JDK
++ Java 8 JDK or above
 
 ### Installing
 
